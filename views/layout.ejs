@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/creative.css">
+  </head>
+  <body>
+    <header>
+      <h1> Swole Mate </h1>
+
+      <a href="/"> Home </a><br>
+
+
+      <%  if (typeof user !== 'undefined') { %>
+        <% if (user.role === 'admin') { %>
+              <a href="/users"> Manage Users </a>
+           <% } %>
+        <a href="/"> Find people </a>
+        <a href="/"> Your Profile </a>
+        <a href="/"> Workout </a>
+
+        <a href="/logout"> Log Out </a>
+
+
+      <% } else { %>
+        <a href="/"> Find people </a><br>
+        <a href="/"> Your Profile </a><br>
+        <a href="/"> Workout </a><br>
+        <a href="/signup"> Sign Up </a><br>
+        <a href="/login"> Log In </a><br>
+
+      <% } %>
+      <!-- <p id="fh5co-header-section">
+				<div class="container">
+					<div class="nav-header">
+						<a href="#" class="js-fh5co-nav-toggle fh5co-nav-toggle"><i></i></a>
+						<h1 id="fh5co-logo"><a href="index.html">Fit<span>ness</span></a></h1>
+						<!-- START #fh5co-menu-wrap -->
+						<!-- <nav id="fh5co-menu-wrap" role="navigation">
+							<ul class="sf-menu" id="fh5co-primary-menu">
+								<li>
+									<a href="index.html">Home</a>
+								</li>
+								<li>
+									<a href="schedule.html">Schedule</a>
+								</li>
+								<li><a href="trainer.html">Trainers</a></li>
+								<li><a href="about.html">About</a></li>
+								<li class="active"><a href="contact.html">Contact</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</p> -->
+</header>
+
+    <%- body %>
+
+    <footer>
+      <p> Made by Art™ </p>
+    </footer>
+  </body>
+</html>

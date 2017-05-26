@@ -31,10 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-const index = require('./routes/index');
-app.use('/', index);
-
+app.use(layouts);
+// --------------ROUTES-------------------|
+const index = require('./routes/index');//|
+app.use('/', index);                    //|
+// ---------------------------------------
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
