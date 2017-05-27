@@ -11,7 +11,9 @@ const passport     = require('passport');
 const bcrypt       = require('bcrypt');
 const flash        = require('connect-flash');
 
-
+// Tell node to run the code contained in this file
+// (this sets up passport and our strategies)
+require('./config/passport-config.js');
 
 mongoose.connect('mongodb://localhost/swolemate');
 
@@ -32,10 +34,49 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
-// --------------ROUTES-------------------|
-const index = require('./routes/index');//|
-app.use('/', index);                    //|
-// ---------------------------------------
+app.use(session({
+  key: "ArtKey",
+  secret: 'ArtSecret',
+  cookie:
+  {
+    maxAge: 1000000,
+    // path: '/'
+  },
+  // these two options are there to prevent warnings
+  resave: true,
+  saveUninitialized: true
+}) );
+
+app.use(flash());
+
+// These need to come AFTER the session middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// PASSPORT GOES THROUGH THIS
+// 1. Our form
+// 2. LocalStrategy callback
+// 3.(if successful) passport.serializeUser()
+const FbStrategy = require('passport-facebook').Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const LocalStrategy = require('passport-local').Strategy;
+
+// Only if logged in
+//  user: req.user for all renders
+// Also after passport middleware
+app.use((req, res, next) => {
+  if (req.user) {
+    res.locals.user = req.user;
+  }
+  next();
+});
+// --------------ROUTES--------------------------------------|
+const index = require('./routes/index');                   //|
+app.use('/', index);                                       //|
+const myAuthRoutes = require('./routes/authentication.js');//|
+app.use('/', myAuthRoutes);                                //|
+// ----------------------------------------------------------|
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   const err = new Error('Not Found');
