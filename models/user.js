@@ -12,9 +12,12 @@ const userSchema = new Schema(
        enum: [ 'normal user', 'admin'],
        default: 'normal user'
     },
+    gender: {type: String},
     // Traditional registration users
     username: { type: String },
+    dob: {type: Date, default: new Date()},
     encryptedPassword: { type: String },
+
 
     // Login with Facebook users
     facebookID: { type: String },

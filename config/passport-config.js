@@ -30,47 +30,47 @@ passport.deserializeUser((userId, cb) => {
   });
 });
 
-// passport.use( new FbStrategy (
-//   {
-//     clientID: process.env.FB_APP_ID,
-//     clientSecret: process.env.FB_APP_SECRET,
-//     callbackURL:'/auth/facebook/callback'
-//   },            // address for a route in our app
-//   (accessToken, refreshToken, profile, done) => {
-//     console.log('');
-//     console.log('FACEBOOK PROFILE~~~~~~~~~~~~~~~~~');
-//     console.log(profile);
-//
-//     User.findOne(
-//       { facebookID: profile.id },
-//       (err, foundUser) => {
-//         if(err) {
-//           done(err);
-//           return;
-//         }
-//         // If user is already registered, just log them in!
-//         if (foundUser) {
-//           done(null, foundUser);
-//           return;
-//         }
-//         // Register the user if they are not registered
-//         const theUser = new User({
-//           facebookID: profile.id,
-//           name: profile.displayName
-//         });
-//
-//         theUser.save((err) => {
-//           if (err) {
-//             done();
-//             return;
-//           }
-//           // This logs in the newly registered user
-//           done(null, theUser);
-//         });
-//       }
-//     );
-//   }
-// ) );
+passport.use( new FbStrategy (
+  {
+    clientID: 111393616116904,
+    clientSecret: "8c0e9c8f0c33d1aa4f1009a11a783dbb",
+    callbackURL:'/auth/facebook/callback'
+  },            // address for a route in our app
+  (accessToken, refreshToken, profile, done) => {
+    console.log('');
+    console.log('FACEBOOK PROFILE~~~~~~~~~~~~~~~~~');
+    console.log(profile);
+
+    User.findOne(
+      { facebookID: profile.id },
+      (err, foundUser) => {
+        if(err) {
+          done(err);
+          return;
+        }
+        // If user is already registered, just log them in!
+        if (foundUser) {
+          done(null, foundUser);
+          return;
+        }
+        // Register the user if they are not registered
+        const theUser = new User({
+          facebookID: profile.id,
+          name: profile.displayName
+        });
+
+        theUser.save((err) => {
+          if (err) {
+            done();
+            return;
+          }
+          // This logs in the newly registered user
+          done(null, theUser);
+        });
+      }
+    );
+  }
+) );
 
 // passport.use( new GoogleStrategy(
 //   {

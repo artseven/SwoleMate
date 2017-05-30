@@ -1,34 +1,69 @@
-<h2> Log In </h2>
+<div class="container" id="wrap">
+    <div class="omb_login">
+    	<h2 class="omb_authTitle">Login</h2>
+      <center><a href="/signup">Don't have an account? Sign up</a>
+        <br>
+		<div class="row omb_row-sm-offset-3 omb_socialButtons">
+    	    <div class="col-xs-4 col-sm-3">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
+			        <i class="fa fa-facebook visible-xs"></i>
+			        <span class="hidden-xs">Facebook</span>
+		        </a>
+	        </div>
+        	<!-- <div class="col-xs-4 col-sm-2">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-twitter">
+			        <i class="fa fa-twitter visible-xs"></i>
+			        <span class="hidden-xs">Twitter</span>
+		        </a>
+	        </div> -->
+        	<div class="col-xs-4 col-sm-3">
+		        <a href="#" class="btn btn-lg btn-block omb_btn-google">
+			        <i class="fa fa-google-plus visible-xs"></i>
+			        <span class="hidden-xs">Google+</span>
+		        </a>
+	        </div>
+		</div>
 
-<% if (errorMessage.length > 0) { %>
-  <div class="error"> <%= errorMessage %> </div>
-<% } %>
-<br>
-<form method="post" action="/login">
-  <label for="username-input"> Account name </label>
-  <!-- has to match with        usernameField: 'loginUsername' -->
-  <input  id="username-input" type="text" name="loginUsername">
-  <br>
+		<div class="row omb_row-sm-offset-3 omb_loginOr">
+			<div class="col-xs-12 col-sm-6">
+				<hr class="omb_hrOr">
+				<span class="omb_spanOr">or</span>
+			</div>
+		</div>
 
-  <label for="password-input"> Password </label>
-  <!-- hast to match with           passwordField: 'loginPassword' -->
-  <input  id="password-input" type="password" name="loginPassword">
-  <br>
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-6">
+			    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+						<input type="text" class="form-control" name="username" placeholder="email address">
+					</div>
+					<span class="help-block"></span>
 
-  <button> Log In </button>
-</form>
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+						<input  type="password" class="form-control" name="password" placeholder="Password">
+					</div>
+                    <span class="help-block"><% if (errorMessage.length > 0) { %>
+                      <div class="error"> <%= errorMessage %> </div>
+                    <% } %>
+                    <br></span>
 
-
-<a href="/auth/facebook">
-  Log In with Facebook
-</a>
-<br>
-
-
-<a href="/auth/google">
-  Log In with Google
-</a>
-<br>
-<p> Don't have an account?
-  <a href="/signup"> Sign Up </a>
-</p>
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+				</form>
+			</div>
+    	</div>
+		<div class="row omb_row-sm-offset-3">
+			<div class="col-xs-12 col-sm-3">
+				<label class="checkbox">
+					<input type="checkbox" value="remember-me">Remember Me
+				</label>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<p class="omb_forgotPwd">
+					<a href="#">Forgot password?</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
