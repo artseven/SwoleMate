@@ -6,7 +6,8 @@ const userSchema = new Schema(
   // 1st arg -> fields of documents of this collection
   {
     // All users
-    name: { type: String },
+    firstName: { type: String },
+    lastName: { type: String},
     role: {
        type: String,
        enum: [ 'normal user', 'admin'],
@@ -16,6 +17,7 @@ const userSchema = new Schema(
     // Traditional registration users
     username: { type: String },
     dob: {type: Date, default: new Date()},
+    email: {type: String},
     encryptedPassword: { type: String },
 
 

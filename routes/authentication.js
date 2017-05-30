@@ -59,12 +59,25 @@ authRoutes.post('/signup',
       // Encrypt the password
       const salt = bcrypt.genSaltSync(10);
       const hashPass = bcrypt.hashSync(signupPassword, salt);
+      console.log(hashPass);
+      console.log(Date());
+      console.log("Day" +req.body.day);
+      console.log("Day" +req.body.month);
+      console.log("Day" +req.body.year);
+      console.log(req.body.day+'.'+req.body.month+'.'+req.body.year);
+      const birthday = req.body.day+'.'+req.body.month+'.'+req.body.year;
+
 
       // Create the user
       const theUser = new User ({
-        name: req.body.signupName,
+        firstName: req.body.firsName,
+        lastName: req.body.lastName,
+        email: req.body.signupEmail,
         username: signupUsername,
-        encryptedPassword: hashPass
+        encryptedPassword: hashPass,
+        gender: req.body.gender,
+        dob: birthday
+
       });
       // Save it
       theUser.save((err) => {
@@ -133,6 +146,18 @@ authRoutes.get('/auth/google/callback', passport.authenticate('google', {
   successRedirect: '/',
   failureRedirect:'/login'
 }));
+
+authRoutes.get('/profile', ensure.ensureLoggedIn('/login'), (req, res) => {
+    res.render('auth/profile', {
+        user : req.user
+    });
+});
+
+authRoutes.get('/logout', ensure.ensureLoggedIn('/login'), (req, res) => {
+    req.logout();
+    req.flash('success', 'You have successfully logged out');
+    res.redirect('/');
+});
 
 
 module.exports = authRoutes;
