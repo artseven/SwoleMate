@@ -1,9 +1,9 @@
-const express = require('express');
-const ensure  = require('connect-ensure-login');
-const multer   = require('multer');
+const express  = require('express');
+const ensure   = require('connect-ensure-login');
+const User     = require('../models/user.js');
 const path     = require('path');
-const User = require('../models/user.js');
-const bcrypt = require('bcrypt');
+const multer   = require('multer');
+const bcrypt   = require('bcrypt');
 
 const userRouter = express.Router();
 
@@ -13,125 +13,111 @@ userRouter.get('/profile', ensure.ensureLoggedIn('/login'), (req, res) => {
     });
 });
 
-const myUpload = multer({
-  dest: path.join(__dirname, './public/uploads/profile-pic/')
-});
 
 userRouter.get('/profile/edit',
  ensure.ensureLoggedIn('/login'),
- myUpload.single('userPhoto'),
   (req, res) => {
     res.render('users/edit-profile-view', {
-        user : req.user
+        user : req.user,
+        successMessage: req.flash('success')
     });
 });
-// routerThingy.get('/user/:id/edit', (req, res, next) => {
-userRouter.get('/profile/edit',
-//          redirects to /login if you are NOT logged in
-  ensure.ensureLoggedIn('/login'),
 
-  (req, res, next) => {
-  // If not 'ensureLoggedIn()' we would have to do this:
-  // if (!req.user) {
-  //   res.redirect('/login');
-  //   return;
-  // }
-  //
-  res.render('users/edit-profile-view.ejs', {
-    successMessage: req.flash('success')
-  });
+const myUpload = multer({
+  dest: path.join(__dirname, '../public/uploads/post-pics/')
 });
 
-// routerThingy.post('user/edit',
-//   ensure.ensureLoggedIn ('/login'),
-//   (req, res, next) => {
-//     // req.save();
-//     User.findByIdAndUpdate(
-//       req.user._id,
-//       {
-//         //what to update
-//         name: req.body.profileName,
-//         username: req.body.profileUsername
-//       },
-//       (err, theUser) => {
-//         if (err) {
-//           next(err);
-//           return;
-//         }
-//
-//         req.flash('success', 'Changes saved');
-//
-//         res.redirect('/profile/edit');
-//       }
-//     );
-//   }
-// );
-
 userRouter.post('/profile/edit',
-
-  ensure.ensureLoggedIn('/login'),
-
+  myUpload.single('photoAddress'),
+  ensure.ensureLoggedIn ('/login'),
   (req, res, next) => {
-    const profileName = req.body.profileName;
-    const profileUsername = req.body.profileUsername;
-    const currentPassword = req.body.profileCurrentPassword;
-    const newPassword = req.body.profileNewPassword;
-
-    User.findOne(
-      { username: profileUsername },
-      { username: 1 },
-      (err, foundUser) => {
+    console.log(req.file);
+    User.findByIdAndUpdate(
+      req.user._id,
+      {
+        //what to update
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        gender: req.body.gender,
+        dob: req.body.dob,
+        photoAddress: `/uploads/post-pics/${req.file.filename}`,
+        email: req.body.email
+      },
+      (err, theUser) => {
         if (err) {
           next(err);
           return;
         }
 
-        // if there's a user with the username and it's not you
-        if (foundUser && !foundUser._id.equals(req.user._id)) {
-          res.render('user/edit-profile-view.ejs', {
-            errorMessage: 'Username already taken. 😤'
-          });
-          return;
-        }
+        req.flash('success', 'Changes saved');
 
-        // const profileChanges = {
-        //   name: req.body.profileName,
-        //   username: req.body.profileUsername
-        // };
-
-        // add updates from form
-        req.user.firstName = req.body.firstName;
-        req.user.lastName = req.body.lastName;
-        req.user.gender = req.body.gender;
-        req.user.dob = req.body.dob;
-        req.user.photoAddress = req.body.photoAddress;
-        req.body.email = req.body.email;
-
-        // if both passwords are filled and the current password is correct
-        if (currentPassword && newPassword
-            && bcrypt.compareSync(currentPassword, req.user.encryptedPassword)) {
-          // add new encryptedPassword to the updates
-          const salt = bcrypt.genSaltSync(10);
-          const hashPass = bcrypt.hashSync(newPassword, salt);
-          // profileChanges.encryptedPassword = hashPass;
-          req.user.encryptedPassword = hashPass;
-        }
-
-        // save updates!
-        req.user.save((err) => {
-          if (err) {
-            next(err);
-            return;
-          }
-
-          req.flash('success', 'Changes saved. 👻');
-
-          res.redirect('/profile/edit');
-        });
+        res.redirect('/profile/edit');
       }
     );
   }
 );
+// userRouter.post('/profile/edit',
+//
+//   ensure.ensureLoggedIn('/login'),
+
+//   (req, res, next) => {
+//     const profileName = req.body.profileName;
+//     const profileUsername = req.body.profileUsername;
+//     const currentPassword = req.body.profileCurrentPassword;
+//     const newPassword = req.body.profileNewPassword;
+//
+//     User.findByIdAndUpdateOne(
+//       req.user._id,
+//       (err, foundUser) => {
+//         if (err) {
+//           next(err);
+//           return;
+//         }
+//
+//         // if there's a user with the username and it's not you
+//         if (foundUser && !foundUser._id.equals(req.user._id)) {
+//           res.render('user/edit-profile-view.ejs', {
+//             errorMessage: 'Username already taken. 😤'
+//           });
+//           return;
+//         }
+//
+//         // add updates from form
+//         console.log(req.file);
+//         console.log(req.file.filename);
+//
+//         req.user.firstName = req.body.firstName;
+//         req.user.lastName = req.body.lastName;
+//         req.user.gender = req.body.gender;
+//         req.user.dob = req.body.dob;
+//         req.user.photoAddress = req.body.photoAddress;
+//         req.body.email = req.body.email;
+//
+//         // if both passwords are filled and the current password is correct
+//         if (currentPassword && newPassword
+//             && bcrypt.compareSync(currentPassword, req.user.encryptedPassword)) {
+//           // add new encryptedPassword to the updates
+//           const salt = bcrypt.genSaltSync(10);
+//           const hashPass = bcrypt.hashSync(newPassword, salt);
+//           // profileChanges.encryptedPassword = hashPass;
+//           req.user.encryptedPassword = hashPass;
+//         }
+//
+//         // save updates!
+//         req.user.save((err) => {
+//           if (err) {
+//             next(err);
+//             return;
+//           }
+//
+//           req.flash('success', 'Changes saved. 👻');
+//
+//           res.redirect('/profile/edit');
+//         });
+//       }
+//     );
+//   }
+// );
 
 
 userRouter.get('/users', (req, res, next) => {
