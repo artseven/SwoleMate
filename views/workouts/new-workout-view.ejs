@@ -1,14 +1,25 @@
+<center>
 <h2> Add a New Workout </h2>
 
-<form method="post" action="/rooms" enctype="multipart/form-data">
-  <label for="room-name-input"> Room Name </label>
-  <input id="room-name-input" type="text" name="roomName"
-    placeholder="My Awesome Space Room">
-  <br>
+<form method="post" action="/workout" enctype="multipart/form-data">
+  <label>Type Of Workout</label>
+  <label class ="radio-inline" id="strength-option"><input type="radio" name="workout" value="strength" id=strength /> Strength</label>
+  <div style="display:none" id="toggle-strength">
+    <label for="weight-input"> Weight: </label>
+    <input type="number" name="weight-input">
+    <label for="reps-input"> Repetitions: </label>
+    <input type="number" name="reps-input">
+  </div>
+  <label class ="radio-inline" id="cardio-option"><input type="radio" name="workout" value="cardio" id=cardio /> Cardio</label>
+  <div style="display:none" id="toggle-cardio">
+    <label for="time-input"> Time: </label>
+    <input type="time" name="time-input">
+    <label for="distance-input"> Distance(miles): </label>
+    <input type="number" name="distance-input">
+    <label for="calories-input"> Calories burned: </label>
+    <input type="number" name="calories-input">
+  </div>
 
-  <label for="room-desc-input"> Description </label>
-  <textarea id="room-desc-input" name="roomDescription"
-    placeholder="It's a beautiful room in Space!"></textarea>
   <br>
 
   <label for="room-photo-input"> Upload Photo </label>
