@@ -7,10 +7,12 @@ const workoutSchema = new Schema(
   // 1st arg -> fields of documents of this collection
   {
     strength: {
+      strName: { type: String},
       weight: { type: Number},
       reps: { type: Number}
     },
     cardio: {
+      carName: { type: String},
       time: { type: Number},
       calories: { type: Number},
       distance: { type: Number}

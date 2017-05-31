@@ -34,40 +34,42 @@ workoutRouter.get('/workout/new',
     res.render('workouts/new-workout-view.ejs');
   }
 );
-// // Uploading files
-// const myUploader = multer({
-//    dest: path.join(__dirname, '../public/uploads/')
-// });
-// // <form method="post" action="/rooms">
-// workoutRouter.post('/workout',
-// // We need to be logged in to create rooms
-//   ensure.ensureLoggedIn('/login'),
-// //<input type="file" name="roomPhoto">
-//   myUploader.single('workoutPhoto'),
-//
-//   (req, res, next) => {
-//     console.log('FILE UPLOAD---------------------');
-//     console.log(req.file);
-//
-//     const theWorkout = new Workout({
-//       name: req.body.roomName,
-//       description: req.body.roomDescription,
-//       photoAddress: `/uploads/${req.file.filename}`,
-//       owner: req.user._id
-//     });
-//
-//     theRoom.save((err) => {
-//       if (err) {
-//         next(err);
-//         return;
-//       }
-//
-//       req.flash('success', 'Your room was saved succesfully');
-//
-//       res.redirect('/rooms');
-//     });
-//   }
-// );
+// Uploading files
+const myUploader = multer({
+   dest: path.join(__dirname, '../public/uploads/')
+});
+// <form method="post" action="/workout">
+workoutRouter.post('/workout',
+// We need to be logged in to create workouts
+  ensure.ensureLoggedIn('/login'),
+//<input type="file" name="workoutPhoto">
+  myUploader.single('workoutPhoto'),
+
+  (req, res, next) => {
+    console.log('FILE UPLOAD---------------------');
+    console.log(req.file);
+    const theWorkout = new Workout({
+      strength : {
+      strName : req.body.strName,
+      weight: req.body.weight,
+      reps: req.body.reps,
+    },
+      // photoAddress: `/uploads/${req.file.filename}`,
+      performer: req.user._id
+    });
+
+    theWorkout.save((err) => {
+      if (err) {
+        next(err);
+        return;
+      }
+
+      req.flash('success', 'Your workout was saved succesfully');
+
+      res.redirect('/workout');
+    });
+  }
+);
 
 
 module.exports = workoutRouter;

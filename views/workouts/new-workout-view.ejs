@@ -5,26 +5,30 @@
   <label>Type Of Workout</label>
   <label class ="radio-inline" id="strength-option"><input type="radio" name="workout" value="strength" id=strength /> Strength</label>
   <div style="display:none" id="toggle-strength">
+    <label for="strName-input"> Name: </label>
+    <input type="text" name="strName">
     <label for="weight-input"> Weight: </label>
-    <input type="number" name="weight-input">
+    <input type="number" name="weight">
     <label for="reps-input"> Repetitions: </label>
-    <input type="number" name="reps-input">
+    <input type="number" name="reps">
   </div>
   <label class ="radio-inline" id="cardio-option"><input type="radio" name="workout" value="cardio" id=cardio /> Cardio</label>
   <div style="display:none" id="toggle-cardio">
+    <label for="carName-input"> Name: </label>
+    <input type="text" name="carName">
     <label for="time-input"> Time: </label>
-    <input type="time" name="time-input">
+    <input type="timer" name="time">
     <label for="distance-input"> Distance(miles): </label>
-    <input type="number" name="distance-input">
+    <input type="number" name="distance">
     <label for="calories-input"> Calories burned: </label>
-    <input type="number" name="calories-input">
+    <input type="number" name="calories">
   </div>
 
   <br>
 
   <label for="room-photo-input"> Upload Photo </label>
-  <input  id="room-photo-input" type="file" name="roomPhoto">
+  <input  id="room-photo-input" type="file" name="workoutPhoto">
   <br>
 
-  <button> Save Room </button>
+  <button> Save workout </button>
 </form>
