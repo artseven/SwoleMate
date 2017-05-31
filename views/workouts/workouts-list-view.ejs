@@ -1,7 +1,8 @@
+<div style="border-bottom: 2px solid black; border-shadow: 1px; text-align: center">
 <% if (workouts.length === 0) { %>
 
-  <h2> You don't have rooms yet </h2>
-  <a href="/workout/new"> Create your workout </a>
+  <h2> You don't have any workouts saved yet </h2>
+
 
 <% } else { %>
 
@@ -12,18 +13,18 @@
   <% } %>
 
   <ul>
-    <% rooms.forEach((oneRoom) => { %>
+    <% workouts.forEach((oneWorkout) => { %>
       <li>
-        <h3> <%= oneRoom.name %> </h3>
+        <h3> <%= oneWorkout.strength %> </h3>
 
-        <p> <%= oneRoom.description %> </p>
+        <p> <%= oneWorkout.strength.weight %> </p>
 
-        <img src="<%= oneRoom.photoAddress %>"
+        <img src="<%= oneWorkout.photoAddress %>"
       </li>
     <% }) %>
   </ul>
 
 <% } %>
-<a href="/rooms/new">
-  Create a Room
+<a href="/workout/new">
+  Create a Workout
 </a>

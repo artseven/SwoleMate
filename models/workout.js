@@ -16,7 +16,7 @@ const workoutSchema = new Schema(
       distance: { type: Number}
     },
     performer: { type: Schema.Types.ObjectId},
-    date: { default: new Date() }
+    date: { type: Date, default: new Date() }
   },
     //2nd arg -> additional options
   {
@@ -27,4 +27,4 @@ const workoutSchema = new Schema(
 
 const Workout = mongoose.model('Workout', workoutSchema);
 
-module.exports = User;
+module.exports = Workout;

@@ -77,10 +77,10 @@ const index = require('./routes/index');                    //|
 app.use('/', index);                                        //|
 const myAuthRoutes = require('./routes/authentication.js'); //|
 app.use('/', myAuthRoutes);                                 //|
+const workoutRoutes = require('./routes/workout-routes');   //|
+app.use('/',workoutRoutes);                                 //|
 const userRoutes = require('./routes/users-routes.js');     //|
 app.use('/',userRoutes);                                    //|
-const workoutRoutes = require('./routes/workout-routes.js');//|
-app.use('/',workoutRoutes);                                 //|
 // -----------------------------------------------------------|
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
