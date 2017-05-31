@@ -39,7 +39,7 @@ app.use(session({
   secret: 'ArtSecret',
   cookie:
   {
-    maxAge: 1000000,
+    maxAge: 10000000,
     // path: '/'
   },
   // these two options are there to prevent warnings
@@ -76,6 +76,8 @@ const index = require('./routes/index');                   //|
 app.use('/', index);                                       //|
 const myAuthRoutes = require('./routes/authentication.js');//|
 app.use('/', myAuthRoutes);                                //|
+const userRoutes = require('./routes/users-routes.js');    //|
+app.use('/',userRoutes);                                   //|
 // ----------------------------------------------------------|
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

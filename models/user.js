@@ -19,6 +19,7 @@ const userSchema = new Schema(
     dob: {type: Date, default: new Date()},
     email: {type: String},
     encryptedPassword: { type: String },
+    photoAddress: { type: String},
 
 
     // Login with Facebook users

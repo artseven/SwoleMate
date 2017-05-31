@@ -83,7 +83,7 @@ authRoutes.post('/signup',
           // 1st arg -> key of the message
           'success',
           // 2nd arg -> the actual message
-          'You have registered successfully!'
+          'You have registered successfully! Now Log In to start'
         );
 
       // Redirect to home page if save is successful
@@ -111,13 +111,6 @@ authRoutes.post('/login',
   } )
 );
 
-authRoutes.get('/logout', (req, res, next) => {
-  // req.logout() method provided by Passport
-  req.logout();
-
-  req.flash('success', 'You have logged out successfully');
-  res.redirect('/');
-});
 
 // Link to the address to log in with Facebook
 authRoutes.get('/auth/facebook', passport.authenticate('facebook'));
@@ -141,11 +134,7 @@ authRoutes.get('/auth/google/callback', passport.authenticate('google', {
   failureRedirect:'/login'
 }));
 
-authRoutes.get('/profile', ensure.ensureLoggedIn('/login'), (req, res) => {
-    res.render('auth/profile', {
-        user : req.user
-    });
-});
+
 
 authRoutes.get('/logout', ensure.ensureLoggedIn('/login'), (req, res) => {
     req.logout();
