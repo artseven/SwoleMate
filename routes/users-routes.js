@@ -118,50 +118,50 @@ userRouter.post('/profile/edit',
 //     );
 //   }
 // );
-
-
-userRouter.get('/users', (req, res, next) => {
-  if (! req.user || req.user.role !== 'admin') {
-    // Show 404 page
-    next();
-    return;
-  }
-
-  User.find((err, usersList) => {
-    if (err) {
-      next(err);
-      return;
-    }
-
-    res.render('user/users-list-view.ejs', {
-      users: usersList,
-      successMessage: req.flash('success')
-    });
-  });
-});
-
-userRouter.post('/users/:id/admin', (req, res, next) => {
-  if (!req.user || req.user.role !== 'admin') {
-    // show 404
-    next();
-    return;
-  }
-
-  User.findByIdAndUpdate(
-    req.params.id,
-    { role: 'admin'},
-    (err, theUser) => {
-      if (err) {
-        next(err);
-        return;
-      }
-      req.flash('success', `User "${theUser.name}" is now an admin`);
-
-      res.redirect('/users');
-
-    }
-  );
-});
+// 
+//
+// userRouter.get('/users', (req, res, next) => {
+//   if (! req.user || req.user.role !== 'admin') {
+//     // Show 404 page
+//     next();
+//     return;
+//   }
+//
+//   User.find((err, usersList) => {
+//     if (err) {
+//       next(err);
+//       return;
+//     }
+//
+//     res.render('user/users-list-view.ejs', {
+//       users: usersList,
+//       successMessage: req.flash('success')
+//     });
+//   });
+// });
+//
+// userRouter.post('/users/:id/admin', (req, res, next) => {
+//   if (!req.user || req.user.role !== 'admin') {
+//     // show 404
+//     next();
+//     return;
+//   }
+//
+//   User.findByIdAndUpdate(
+//     req.params.id,
+//     { role: 'admin'},
+//     (err, theUser) => {
+//       if (err) {
+//         next(err);
+//         return;
+//       }
+//       req.flash('success', `User "${theUser.name}" is now an admin`);
+//
+//       res.redirect('/users');
+//
+//     }
+//   );
+// });
 
 
 module.exports = userRouter;
