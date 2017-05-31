@@ -60,23 +60,16 @@ authRoutes.post('/signup',
       const salt = bcrypt.genSaltSync(10);
       const hashPass = bcrypt.hashSync(signupPassword, salt);
       console.log(hashPass);
-      console.log(Date());
-      console.log("Day" +req.body.day);
-      console.log("Day" +req.body.month);
-      console.log("Day" +req.body.year);
-      console.log(req.body.day+'.'+req.body.month+'.'+req.body.year);
-      const birthday = req.body.day+'.'+req.body.month+'.'+req.body.year;
-
 
       // Create the user
       const theUser = new User ({
-        firstName: req.body.firsName,
+        firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.signupEmail,
         username: signupUsername,
         encryptedPassword: hashPass,
         gender: req.body.gender,
-        dob: birthday
+        dob: req.body.bday
 
       });
       // Save it
@@ -94,7 +87,7 @@ authRoutes.post('/signup',
         );
 
       // Redirect to home page if save is successful
-        res.redirect('/');
+        res.redirect('/login');
       });
     }
   );
@@ -103,7 +96,8 @@ authRoutes.post('/signup',
 
 authRoutes.get('/login', (req, res, next) => {
   res.render('auth/login-view.ejs', {
-    errorMessage: req.flash('error')
+    errorMessage: req.flash('error'),
+    successMessage: req.flash('success')
     //      default name for error messages in Passport
   });
 });

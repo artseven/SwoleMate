@@ -37,18 +37,21 @@
 			    <form class="omb_loginForm" action="" autocomplete="off" method="POST">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text" class="form-control" name="username" placeholder="email address">
+						<input type="text" class="form-control" name="loginUsername" placeholder="email address">
 					</div>
 					<span class="help-block"></span>
 
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						<input  type="password" class="form-control" name="password" placeholder="Password">
+						<input  type="password" class="form-control" name="loginPassword" placeholder="Password">
 					</div>
                     <span class="help-block"><% if (errorMessage.length > 0) { %>
                       <div class="error"> <%= errorMessage %> </div>
                     <% } %>
                     <br></span>
+                    <% if ( successMessage.length > 0 ) { %>
+                      <div class='success'> <%= successMessage %> </div>
+                    <% } %>
 
 					<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 				</form>
