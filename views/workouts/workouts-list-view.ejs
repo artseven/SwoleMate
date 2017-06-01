@@ -1,4 +1,4 @@
-<div style="background-color: #222831;border-bottom: 2px solid black; border-shadow: 1px; text-align: center">
+<div style="background-color: #222831;  text-align: center">
   <% if (workouts.length === 0) { %>
 
     <h2> You don't have any workouts saved yet </h2>
@@ -7,7 +7,6 @@
     </a>
 
   <% } else { %>
-<div class="container">
   <div class="container">
       <div class="page-header main-image-overlay">
   		<h1 id="">Workout Timeline</h1>
@@ -19,12 +18,6 @@
           </a>
 
       </div>
-      <!-- <div class="timeline-badge timeline-filter-movement">
-          <a href="#">
-              <span class="glyphicon glyphicon-time"></span>
-          </a>
-      </div> -->
-
   </div>
   <% workouts.forEach((oneWorkout) => { %>
   <div class="row timeline-movement">
@@ -68,8 +61,7 @@
               </div>
           </div>
       </div>
-
-  </div>
+    </div>
         <% } %>
       <% }) %>
   </div>
@@ -78,5 +70,3 @@
 
 
 <% } %>
-
-</div>
