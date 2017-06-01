@@ -1,30 +1,82 @@
-<div style="border-bottom: 2px solid black; border-shadow: 1px; text-align: center">
-<% if (workouts.length === 0) { %>
+<div style="background-color: #222831;border-bottom: 2px solid black; border-shadow: 1px; text-align: center">
+  <% if (workouts.length === 0) { %>
 
-  <h2> You don't have any workouts saved yet </h2>
+    <h2> You don't have any workouts saved yet </h2>
+    <a href="/workout/new">
+      Create a Workout
+    </a>
 
+  <% } else { %>
+<div class="container">
+  <div class="container">
+      <div class="page-header main-image-overlay">
+  		<h1 id="">Workout Timeline</h1>
+  	</div>
+  	<div id="timeline"><div class="row timeline-movement timeline-movement-top">
+      <div class="timeline-badge timeline-future-movement">
+          <a href="/workout/new">
+              <span class="glyphicon glyphicon-plus"></span>
+          </a>
 
-<% } else { %>
+      </div>
+      <!-- <div class="timeline-badge timeline-filter-movement">
+          <a href="#">
+              <span class="glyphicon glyphicon-time"></span>
+          </a>
+      </div> -->
 
-  <h2> Your Workouts </h2>
+  </div>
+  <% workouts.forEach((oneWorkout) => { %>
+  <div class="row timeline-movement">
 
-  <% if (successMessage.length > 0) { %>
-    <div class="success"> <%= successMessage %> </div>
+      <div class="timeline-badge">
+          <span class="timeline-balloon-date-day"><%= oneWorkout.date.getDate() %></span><br>
+          <span class="timeline-balloon-date-month">JUN</span>
+      </div>
+
+  <% if (oneWorkout.strength.strName !== "") { %>
+      <div class="col-sm-6  timeline-item">
+          <div class="row">
+              <div class="col-sm-11">
+                  <div class="timeline-panel credits">
+                      <ul class="timeline-panel-ul">
+                          <li><span class="importo">Exercise name: <%= oneWorkout.strength.strName %></span></li><br>
+                          <li><span class="causale">Weight: <%= oneWorkout.strength.weight %> lbs </span> </li><br>
+                          <li><span class="causale"> Repetitions: <%= oneWorkout.strength.reps %></span> </li>
+                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= oneWorkout.createdAt %></small></p> </li>
+                      </ul>
+                  </div>
+
+              </div>
+          </div>
+      </div>
   <% } %>
+  <% if (oneWorkout.cardio.carName !== "") { %>
+      <div class="col-sm-6  timeline-item">
+          <div class="row">
+              <div class="col-sm-offset-1 col-sm-11">
+                  <div class="timeline-panel debits">
+                      <ul class="timeline-panel-ul">
+                          <li><span class="importo">Cardio Type: <%= oneWorkout.cardio.carName %></span></li><br>
+                          <li><span class="causale">Time spent: <%= oneWorkout.cardio.time %> minutes</span> </li><br>
+                          <li><span class="causale">Distance: <%= oneWorkout.cardio.distance %> miles</span> </li><br>
+                          <li><span class="causale">Calories burned: <%= oneWorkout.cardio.calories %></span> </li><br>
+                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= oneWorkout.createdAt %></small></p> </li>
+                      </ul>
+                  </div>
 
-  <ul>
-    <% workouts.forEach((oneWorkout) => { %>
-      <li>
-        <h3> <%= oneWorkout.strength %> </h3>
+              </div>
+          </div>
+      </div>
 
-        <p> <%= oneWorkout.strength.weight %> </p>
+  </div>
+        <% } %>
+      <% }) %>
+  </div>
+  </div>
+  </div>
 
-        <img src="<%= oneWorkout.photoAddress %>"
-      </li>
-    <% }) %>
-  </ul>
 
 <% } %>
-<a href="/workout/new">
-  Create a Workout
-</a>
+
+</div>

@@ -54,6 +54,12 @@ workoutRouter.post('/workout',
       weight: req.body.weight,
       reps: req.body.reps,
     },
+      cardio: {
+        carName: req.body.carName,
+        time: req.body.time,
+        distance: req.body.distance,
+        calories: req.body.calories
+      },
       // photoAddress: `/uploads/${req.file.filename}`,
       performer: req.user._id
     });
