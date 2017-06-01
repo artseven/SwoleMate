@@ -82,7 +82,7 @@ h1, h2, h3, h4, h5, h6 {
 
 header {
   background: #222831;
-  padding: 60px 0 40px;
+  padding: 1px 0px 1px;
 
 }
 
@@ -103,7 +103,7 @@ header {
 #my-nav-bar {
   display: inline-block;
   float: right;
-  margin-right: 100px;
+  margin-right: 50px;
   color: red;
 }
 
@@ -117,7 +117,7 @@ header {
   background-attachment: fixed;
   background-size: cover;
   position: relative;
-  min-height: 600px;
+  min-height: 750px;
 
 }
 .parallax .overlay {
@@ -152,6 +152,25 @@ header {
   border-radius: 30px;
 }
 
+.main-picture-slide {
+  margin-left: 100px;
+  text-align: center;
+  animation-duration: 2s;
+   animation-name: slideup;
+}
+
+@keyframes slideup {
+ from {
+   margin-top: 100%;
+
+ }
+
+ to {
+   margin-top: 0%;
+
+ }
+}
+}
 .main-image-overlay {
   color: white;
 }
@@ -196,7 +215,7 @@ header {
 }
 
 .commitment {
-  padding-top: 100px;
+  padding-top: 200px;
 }
 
 /*Login layout*/
@@ -338,7 +357,6 @@ legend{
  */
 .profile-header-container{
     margin: 0 auto;
-    text-align: right;
 }
 
 .profile-header-img {

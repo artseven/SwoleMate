@@ -25,7 +25,12 @@ $('#cardio-option').click(function() {
         $(this).attr('checked', true);
     }
 });
-
+$('#anchor1').click(function(){
+    $('html, body').animate({
+        scrollTop: $( $(this).attr('href') ).offset().top
+    }, 500);
+    return false;
+});
 //
 // $(function() {
 //     $('#login-form-link').click(function(e) {

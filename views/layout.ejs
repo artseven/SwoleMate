@@ -32,6 +32,15 @@
             </li>
             <li><a class="special-menu" href="/logout">Logout</a>
             </li>
+            <div class="container">
+              <div class="row">
+                    <div class="profile-header-container">
+                      <div class="profile-header-img">
+                            <img class="img-square" src="<%= user.photoAddress %>" />
+                      </div>
+                    </div>
+              </div>
+            </div>
             <% } else { %>
             <li><a href="/login">Log In</a>
             </li>
@@ -41,20 +50,9 @@
             <% } %>
 
           </ul>
-          <!-- <div class="container">
-            <div class="row">
-                  <div class="profile-header-container">
-                    <div class="profile-header-img">
-                          <img class="img-square" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" />
 
-                          <div class="rank-label-container">
-                              <span class="label label-default rank-label">100 puntos</span>
-                          </div>
-                      </div>
-                  </div>
-            </div>
-          </div> -->
-        </div>
+          </div>
+
 
       </div>
     </nav>
@@ -66,19 +64,20 @@
   <div id="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-4 animate-box">
+        <div class="col-md-4">
           <h3 class="section-title">About Us</h3>
             <p>Stay in touch with the people who want you to become better version of yourself</p>
         </div>
-        <div class="col-md-4 animate-box">
+        <div class="col-md-4">
 					<h3 class="section-title">Our Address</h3>
-					<ul class="contact-info">
-						<li>120 SW 8th St, Miami, FL 33130</li>
-						<li>+ 305 235 5698</li>
-						<li><a href="#">techsfriend.com</a></li>
-					</ul>
+						<p>120 SW 8th St, Miami, FL 33130</p>
+						<p>+ 305 235 5698</p>
+						<p><a href="#">techsfriend.com</a></p>
 				</div>
-				<div class="col-md-4 animate-box">
+        <div class="col-md-4">
+          <h3 class="section-title"> Latest activity</h3>
+
+				<!-- <div class="col-md-4 animate-box">
 					<h3 class="section-title">Send us your opinion</h3>
 					<form class="contact-form">
 						<div class="form-group">
@@ -97,7 +96,7 @@
 							<input type="submit" id="btn-submit" class="btn btn-send-message btn-md" value="Send Message">
 						</div>
 					</form>
-				</div>
+				</div> -->
 			</div>
 			<div class="row copy-right">
 				<div class="col-md-6 col-md-offset-3 text-center">
