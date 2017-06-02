@@ -32,26 +32,35 @@ userRouter.post('/profile/edit',
   ensure.ensureLoggedIn ('/login'),
   (req, res, next) => {
     console.log(req.file);
+    console.log(req.user.photoAddress);
+
+const us = {
+  //what to update
+  firstName: req.body.firstName,
+  lastName: req.body.lastName,
+  gender: req.body.gender,
+  dob: req.body.dob,
+  email: req.body.email
+};
+
+if(req.file !== undefined){
+us.photoAddress =  `/uploads/post-pics/${req.file.filename}`;
+}
+
+
     User.findByIdAndUpdate(
       req.user._id,
-      {
-        //what to update
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        gender: req.body.gender,
-        dob: req.body.dob,
-        photoAddress: `/uploads/post-pics/${req.file.filename}`,
-        email: req.body.email
-      },
+
+    us,
       (err, theUser) => {
         if (err) {
           next(err);
           return;
-        }
+      }
+      console.log(req.file);
+      req.flash('success', 'Changes saved');
 
-        req.flash('success', 'Changes saved');
-
-        res.redirect('/profile/edit');
+      res.redirect('/profile/edit');
       }
     );
   }
@@ -118,7 +127,7 @@ userRouter.post('/profile/edit',
 //     );
 //   }
 // );
-// 
+//
 //
 // userRouter.get('/users', (req, res, next) => {
 //   if (! req.user || req.user.role !== 'admin') {

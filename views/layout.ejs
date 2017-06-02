@@ -13,17 +13,18 @@
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <p class="navbar-brand">Swole Mate </p>
         </div>
+        <img style="width: 5%; height: auto; margin:5px 25px 5px;" src="..\images\icons\89034aad8c2baac3b25a59af15d9721c.jpg">
         <div id="my-nav-bar">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav" style="padding-top: 10px; padding-bottom: 0px;">
+
+            <%  if (typeof user !== 'undefined') { %>
             <li><a href="/">Home</a>
             </li>
             <li><a href="/search">Find People</a>
             </li>
             <li><a href="/workout/new">New Workout</a>
             </li>
-            <%  if (typeof user !== 'undefined') { %>
             <li><a href="/profile">Your profile</a>
             </li>
             <li><a href="/workout">Workout</a>
@@ -46,6 +47,12 @@
             </li>
             <li><a href="/signup">Sign Up</a>
             </li>
+            <li><a href="/">Home</a>
+            </li>
+            <li><a href="/search">Find People</a>
+            </li>
+            <li><a href="/workout/new">New Workout</a>
+            </li>
 
             <% } %>
 
@@ -64,20 +71,20 @@
   <div id="footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <h3 class="section-title">About Us</h3>
             <p>Stay in touch with the people who want you to become better version of yourself</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
 					<h3 class="section-title">Our Address</h3>
 						<p>120 SW 8th St, Miami, FL 33130</p>
 						<p>+ 305 235 5698</p>
 						<p><a href="#">techsfriend.com</a></p>
 				</div>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <h3 class="section-title"> Latest activity</h3>
-
-				<!-- <div class="col-md-4 animate-box">
+        </div>
+        <div class="col-md-3 animate-box">
 					<h3 class="section-title">Send us your opinion</h3>
 					<form class="contact-form">
 						<div class="form-group">
@@ -96,8 +103,8 @@
 							<input type="submit" id="btn-submit" class="btn btn-send-message btn-md" value="Send Message">
 						</div>
 					</form>
-				</div> -->
-			</div>
+				</div>
+
 			<div class="row copy-right">
 				<div class="col-md-6 col-md-offset-3 text-center">
 					<p class="social-icons">
