@@ -486,3 +486,10 @@ legend{
   color: #e2001a;
   font-size: 1.3em;
 }
+
+#map {
+  width: 70%;
+  margin-left: 20px;
+  height: 500px;
+  background-color: grey;
+}

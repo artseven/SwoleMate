@@ -1,0 +1,42 @@
+<h3><center>My Google Maps Demo</h3>
+  <div id="search-panel" style="float: right; overflow: auto; width: auto;">
+    <h1>Map Search</h1>
+  <!-- search box -->
+    <div style="border:1px solid #ccc; background:#e5e5e5; padding:10px;">
+      <input type="text" id="address">
+      <input type="button" value="find" onClick="myFunction.geocode()">
+    </div>
+  </div>
+    <div id="map"></div>
+
+    <script>
+
+      var myFunction = {};
+
+      function initMap() {
+        var miami = {lat: 25.761681 , lng: -80.191788 };
+        var ny = {lat: 40.730610, lng:  -73.935242};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: miami
+        });
+        var marker = new google.maps.Marker({
+          position: miami,
+          map: map
+        });
+        var marker2 = new google.maps.Marker({
+          position: ny,
+          map: map
+        });
+        var infowindow = new google.maps.InfoWindow({
+              content: "User sexy will workout legs at LAFitness on 6/3/2017!"
+        });
+        infowindow.open(map,marker);
+      }
+
+
+    </script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfDwD1re5SqxuReKLfBeayXgrV39csrtY&callback=initMap">
+    </script>
