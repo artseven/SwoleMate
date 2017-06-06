@@ -493,3 +493,102 @@ legend{
   height: 500px;
   background-color: grey;
 }
+
+#my-nav-bar > ul > li.dropdown.open > ul {
+  background-color: rgb(132, 132, 132);
+  color: #848484;
+  text-align: center;
+  max-width: 180px;
+  min-width: 150px;
+  font-size: 18px;
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+}
+
+
+#my-nav-bar > ul > li.dropdown.open > ul > li:nth-child(1) > a {
+  color: white;
+  -webkit-tap-highlight-color: none;
+}
+#my-nav-bar > ul > li.dropdown.open > ul > li:nth-child(2) > a {
+  color: white;
+    -webkit-tap-highlight-color: none;
+}
+
+#my-nav-bar > ul > li.dropdown.open > a {
+  background-color: rgb(132, 132, 132);
+  background-image: none;
+}
+
+#my-nav-bar > ul > div {
+  max-width: 800px;
+}
+
+/*GOOGLE MAP*/
+
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#infowindow-content .title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+.pac-card {
+  margin: 10px 10px 0 0;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  font-family: Roboto;
+}
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}

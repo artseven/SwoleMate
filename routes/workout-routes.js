@@ -28,7 +28,7 @@ workoutRouter.get('/workout',
   }
 );
 workoutRouter.get('/workout/new',
-// We need to be logged in to create rooms
+// We need to be logged in to create workouts
   ensure.ensureLoggedIn('/login'),
   (req, res, next) => {
     res.render('workouts/new-workout-view.ejs');
@@ -47,7 +47,7 @@ workoutRouter.post('/workout',
 
   (req, res, next) => {
     console.log('FILE UPLOAD---------------------');
-    console.log(req.file);
+    console.log(`WORKOUT DATE`+req.body.futureWorkout);
     const theWorkout = new Workout({
       strength : {
       strName : req.body.strName,
@@ -61,8 +61,12 @@ workoutRouter.post('/workout',
         calories: req.body.calories
       },
       // photoAddress: `/uploads/${req.file.filename}`,
-      performer: req.user._id
+      performer: req.user._id,
+      date: req.body.futureWorkout,
+      address: req.body.address
+
     });
+
 
     theWorkout.save((err) => {
       if (err) {

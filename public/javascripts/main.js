@@ -1,224 +1,24 @@
-(function ($, undefined)
-{
 
-var alignRight = function(){
-
-    var docW = $(document).width();
-
-    $('.gaddress').each( function(){
-
-        var $fields = $(this).find('.city,.state,.postalCode,.country'), idx = 0, w = 0;
-        $fields.each( function(i, e){
-            w = parseInt( $(e).width() );
-            if( 1 == idx % 2 && docW >= 768 ){
-                $(e).css( { float: 'right' } );
-            }else{
-                $(e).css( { float: 'none' } );
-            }
-            idx ++;
-        }); // each
-
-    }); // each
-
-}; // alignRight
-
-alignRight();
-$(window).resize( alignRight );
-
-// $input is a jQuery input object
-var gaComplete = function( $input ){
-  var autocomplete,
-
-
-  initAutocomplete = function () {
-    $input.focus( geolocate );
-    var options = {
-
-        types: ['address']
-    };
-    autocomplete = new google.maps.places.Autocomplete(
-        $input.get(0),
-        options
-    );
-    autocomplete.addListener('place_changed', fillInAddress);
-  }, // initAutocomplete
-
-
-  fillInAddress = function () {
-    // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
-    $input.closest('.gaddress').find('[data-gaddress-types]').each( function(){
-
-      var $t = $(this),
-      types  = $t.data('gaddress-types').replace(/\s+/g,' '),
-      orType = types.indexOf(',') !== -1 ,
-      types  = types.split( orType ? ',' : ' ' ),
-      name   = $t.data('gaddress-name'),
-      values = [];
-
-      if(  !(name == 'long_name' || name == 'short_name') ){
-        name = 'long_name';
-      }
-
-      for (var i = 0; i < place.address_components.length; i++) {
-        var address = place.address_components[i];
-
-        for (var j = 0; j < types.length; j++) {
-          if( -1 !== $.inArray( types[j], address.types ) ){
-            values.push( address[ name ] );
-            if( orType ) break; // found one of the defined types
-          }
-        } // for j
-
-        if( orType ) break; // found one of the defined types
-      }// for i
-
-      $t.val( values.join(' ') ).valid();
-
-    });
-  }, // fillInAddress
-
-
-  geolocate = function () {
-    if (!navigator.geolocation)
-      return;
-
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var geolocation = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-      var circle = new google.maps.Circle({
-        center: geolocation,
-        radius: position.coords.accuracy
-      });
-      autocomplete.setBounds(circle.getBounds());
-    });
-
-  };
-
-  // main
-  initAutocomplete();
-
-};
-
-
-init = function (){
-  $('input.gaddress-autocomplete').each( function(){
-    gaComplete( $(this) );
-  });
-};
-
-
-$.fn.gaddress = function (method)
-{
-    if ($.fn.gaddress[method])
-    {
-        return $.fn.gaddress[method].apply(this, Array.prototype.slice.call(arguments, 1));
+$('#strength-option').click(function() {
+    var checked = $(this).attr('checked');
+    if (checked) {
+        $('#toggle-strength').toggle('slide');
+        $(this).attr('checked', false);
     }
-    else if (typeof method === "object" || !method)
-    {
-        return initialize.apply(this, arguments);
+    else {
+        $(this).attr('checked', true);
     }
-    else
-    {
-        $.error("Method " + method + " does not exist on jQuery.gaddress");
+});
+$('#cardio-option').click(function() {
+    var checked = $(this).attr('checked');
+    if (checked) {
+        $('#toggle-cardio').toggle('slide');
+        $(this).attr('checked', false);
     }
-};
-
-$.fn.gaddress.init = init;
-
-})(jQuery);
-
-$(document).gaddress('init');
-
-	// start jqueryform initialization
-	// --------------------------------
-	JF.init('#jqueryform-c89ddb');
-
-	// watch form element change event to run jqueryform's formlogic
-	// ---------------------------------------------------------------
-	var logics = [
-    {
-        "disabled": false,
-        "action": "show",
-        "selector": "f3",
-        "match": "all",
-        "rules": [
-            {
-                "disabled": false,
-                "selector": "f2",
-                "condition": "==",
-                "value": "Strength"
-            }
-        ]
-    },
-    {
-        "disabled": false,
-        "action": "show",
-        "selector": "f4",
-        "match": "any",
-        "rules": [
-            {
-                "disabled": false,
-                "selector": "f2",
-                "condition": "==",
-                "value": "Cardio"
-            }
-        ]
-    },
-    {
-        "disabled": false,
-        "action": "hide",
-        "selector": "f3",
-        "match": "all",
-        "rules": [
-            {
-                "disabled": false,
-                "selector": "f2",
-                "condition": "==",
-                "value": "Cardio"
-            }
-        ]
-    },
-    {
-        "disabled": false,
-        "action": "hide",
-        "selector": "f4",
-        "match": "all",
-        "rules": [
-            {
-                "disabled": false,
-                "selector": "f2",
-                "condition": "==",
-                "value": "Strength"
-            }
-        ]
+    else {
+        $(this).attr('checked', true);
     }
-];
-	$('input,input:radio,select').change(function(){
-		$.formlogic( {logics: logics} );
-	});
-// $('#strength-option').click(function() {
-//     var checked = $(this).attr('checked');
-//     if (checked) {
-//         $('#toggle-strength').toggle('slide');
-//         $(this).attr('checked', false);
-//     }
-//     else {
-//         $(this).attr('checked', true);
-//     }
-// });
-// $('#cardio-option').click(function() {
-//     var checked = $(this).attr('checked');
-//     if (checked) {
-//         $('#toggle-cardio').toggle('slide');
-//         $(this).attr('checked', false);
-//     }
-//     else {
-//         $(this).attr('checked', true);
-//     }
-// });
+});
 $('#anchor1').click(function(){
     $('html, body').animate({
         scrollTop: $( $(this).attr('href') ).offset().top
@@ -227,40 +27,195 @@ $('#anchor1').click(function(){
 });
 
 
+// Google Map initialize
+// function initialize() {
+//   initMap();
+//   initAutocomplete();
+// }
+// var myFunction = {};
+//
+// function initMap() {
+//   var miami = {lat: 25.761681 , lng: -80.191788 };
+//   var ny = {lat: 40.730610, lng:  -73.935242};
+//   var map = new google.maps.Map(document.getElementById('map'), {
+//     zoom: 12,
+//     center: miami
+//   });
+//   var marker = new google.maps.Marker({
+//     position: miami,
+//     map: map
+//   });
+//   var marker2 = new google.maps.Marker({
+//     position: ny,
+//     map: map
+//   });
+//   var infowindow = new google.maps.InfoWindow({
+//         content: "User sexy will workout legs at LAFitness on 6/3/2017!"
+//   });
+//   infowindow.open(map,marker);
+// }
+//
+//
+// //setting the geocoder
+// var geocoder = new google.maps.Geocoder();
+// myFunction.geocode = function() {
+// 	var address = $('#address').val();
+// 	geocoder.geocode( { 'address': address}, function(results, status) {
+// 		if (status == google.maps.GeocoderStatus.OK)
+// 		{
+// 			map.setCenter(results[0].geometry.location);
+// 			var marker = new google.maps.Marker({
+// 				map: map,
+// 				position: results[0].geometry.location
+// 			});
+// 		}
+// 		else
+// 		{
+// 			alert("Geocode was not successful for the following reason: " + status);
+// 		}
+// 	});
+// };
+//
+// // Autocomplete forms for Google Maps
+// var placeSearch, autocomplete;
+//       var componentForm = {
+//         street_number: 'short_name',
+//         route: 'long_name',
+//         locality: 'long_name',
+//         administrative_area_level_1: 'short_name',
+//         country: 'long_name',
+//         postal_code: 'short_name'
+//       };
+//
+//       function initAutocomplete() {
+//         // Create the autocomplete object, restricting the search to geographical
+//         // location types.
+//         autocomplete = new google.maps.places.Autocomplete(
+//             /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+//             {types: ['geocode']});
+//
+//         // When the user selects an address from the dropdown, populate the address
+//         // fields in the form.
+//         autocomplete.addListener('place_changed', fillInAddress);
+//       }
+//
+//       function fillInAddress() {
+//         // Get the place details from the autocomplete object.
+//         var place = autocomplete.getPlace();
+//
+//         for (var component in componentForm) {
+//           document.getElementById(component).value = '';
+//           document.getElementById(component).disabled = false;
+//         }
+//
+//         // Get each component of the address from the place details
+//         // and fill the corresponding field on the form.
+//         for (var i = 0; i < place.address_components.length; i++) {
+//           var addressType = place.address_components[i].types[0];
+//           if (componentForm[addressType]) {
+//             var val = place.address_components[i][componentForm[addressType]];
+//             document.getElementById(addressType).value = val;
+//           }
+//         }
+//       }
+//
+//       // Bias the autocomplete object to the user's geographical location,
+//       // as supplied by the browser's 'navigator.geolocation' object.
+//       function geolocate() {
+//         if (navigator.geolocation) {
+//           navigator.geolocation.getCurrentPosition(function(position) {
+//             var geolocation = {
+//               lat: position.coords.latitude,
+//               lng: position.coords.longitude
+//             };
+//             var circle = new google.maps.Circle({
+//               center: geolocation,
+//               radius: position.coords.accuracy
+//             });
+//             autocomplete.setBounds(circle.getBounds());
+//           });
+//         }
+//       }
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -33.8688, lng: 151.2195},
+    zoom: 13
+  });
+  var card = document.getElementById('pac-card');
+  var input = document.getElementById('pac-input');
+  var types = document.getElementById('type-selector');
+  var strictBounds = document.getElementById('strict-bounds-selector');
 
-//setting the geocoder
-var geocoder = new google.maps.Geocoder();
-myFunction.geocode = function() {
-	var address = $('#address').val();
-	geocoder.geocode( { 'address': address}, function(results, status) {
-		if (status == google.maps.GeocoderStatus.OK)
-		{
-			map.setCenter(results[0].geometry.location);
-			var marker = new google.maps.Marker({
-				map: map,
-				position: results[0].geometry.location
-			});
-		}
-		else
-		{
-			alert("Geocode was not successful for the following reason: " + status);
-		}
-	});
-};
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
 
-// Getting geolocation for workoutRoutes
+  var autocomplete = new google.maps.places.Autocomplete(input);
 
-var x = document.getElementById("demo");
+  // Bind the map's bounds (viewport) property to the autocomplete object,
+  // so that the autocomplete requests use the current map bounds for the
+  // bounds option in the request.
+  autocomplete.bindTo('bounds', map);
 
-function getLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+  var infowindow = new google.maps.InfoWindow();
+  var infowindowContent = document.getElementById('infowindow-content');
+  infowindow.setContent(infowindowContent);
+  var marker = new google.maps.Marker({
+    map: map,
+    anchorPoint: new google.maps.Point(0, -29)
+  });
+
+  autocomplete.addListener('place_changed', function() {
+    infowindow.close();
+    marker.setVisible(false);
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      // User entered the name of a Place that was not suggested and
+      // pressed the Enter key, or the Place Details request failed.
+      window.alert("No details available for input: '" + place.name + "'");
+      return;
     }
-}
 
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude +
-    "<br>Longitude: " + position.coords.longitude;
-}
+    // If the place has a geometry, then present it on a map.
+    if (place.geometry.viewport) {
+      map.fitBounds(place.geometry.viewport);
+    } else {
+      map.setCenter(place.geometry.location);
+      map.setZoom(17);  // Why 17? Because it looks good.
+    }
+    marker.setPosition(place.geometry.location);
+    marker.setVisible(true);
+
+    var address = '';
+    if (place.address_components) {
+      address = [
+        (place.address_components[0] && place.address_components[0].short_name || ''),
+        (place.address_components[1] && place.address_components[1].short_name || ''),
+        (place.address_components[2] && place.address_components[2].short_name || '')
+      ].join(' ');
+    }
+
+    infowindowContent.children['place-icon'].src = place.icon;
+    infowindowContent.children['place-name'].textContent = place.name;
+    infowindowContent.children['place-address'].textContent = address;
+    infowindow.open(map, marker);
+  });
+
+  // Sets a listener on a radio button to change the filter type on Places
+  // Autocomplete.
+  function setupClickListener(id, types) {
+    var radioButton = document.getElementById(id);
+    radioButton.addEventListener('click', function() {
+      autocomplete.setTypes(types);
+    });
+  }
+
+  setupClickListener('changetype-all', []);
+  setupClickListener('changetype-address', ['address']);
+  setupClickListener('changetype-establishment', ['establishment']);
+  setupClickListener('changetype-geocode', ['geocode']);
+
+  document.getElementById('use-strict-bounds')
+      .addEventListener('click', function() {
+        console.log('Checkbox clicked! New state=' + this.checked);
+        autocomplete.setOptions({strictBounds: this.checked});
+      });
+    }

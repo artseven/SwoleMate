@@ -18,12 +18,15 @@ const workoutSchema = new Schema(
       distance: { type: Number}
     },
     performer: { type: Schema.Types.ObjectId},
-    date: { type: Date, default: new Date() }
+    privacy: { type: String},
+    date: { type: Date, default: new Date() },
+    address: {type: String}
   },
     //2nd arg -> additional options
   {
     // Adds "createdAt" and "updatedAt" fields
-    timestamps: true
+    timestamps: true,
+
   }
 );
 

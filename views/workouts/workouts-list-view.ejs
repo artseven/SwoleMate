@@ -1,7 +1,7 @@
 <div style="background-color: #222831;  text-align: center">
   <% if (workouts.length === 0) { %>
 
-    <h2> You don't have any workouts saved yet </h2>
+    <h2 style="color: white;"> You don't have any workouts saved yet </h2>
     <a href="/workout/new">
       Create a Workout
     </a>
@@ -36,7 +36,7 @@
                           <li><span class="importo">Exercise name: <%= oneWorkout.strength.strName %></span></li><br>
                           <li><span class="causale">Weight: <%= oneWorkout.strength.weight %> lbs </span> </li><br>
                           <li><span class="causale"> Repetitions: <%= oneWorkout.strength.reps %></span> </li>
-                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= oneWorkout.createdAt %></small></p> </li>
+                          <li><p><small class="text-muted"><i class="glyphicon glyphicon-time"></i><%= oneWorkout.date %></small></p> </li>
                       </ul>
                   </div>
 
