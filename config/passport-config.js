@@ -1,12 +1,13 @@
 const passport     = require('passport');
 const User         = require('../models/user.js');
+
 const bcrypt       = require('bcrypt');
 // const passportLocal = require('passport-local');
 // const LocalStrategy = passportLocal.Strategy;
 //                                  SAME ||
 const LocalStrategy = require ('passport-local').Strategy;
 const FbStrategy    = require('passport-facebook').Strategy;
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+// const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 
 // Determines WHAT TO SAVE in the session(what to put in the box)
@@ -56,7 +57,7 @@ passport.use( new FbStrategy (
         // Register the user if they are not registered
         const theUser = new User({
           facebookID: profile.id,
-          name: profile.displayName
+          firstName: profile.displayName
         });
 
         theUser.save((err) => {

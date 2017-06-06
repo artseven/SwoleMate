@@ -9,6 +9,7 @@ const bcrypt        = require('bcrypt');
 const mapRouter = express.Router();
 
 mapRouter.get('/map',
+  ensure.ensureLoggedIn('/login'),
   (req, res, next) => {
     res.render('maps/map-view.ejs');
   }
