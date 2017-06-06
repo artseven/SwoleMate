@@ -46,9 +46,13 @@ workoutRouter.post('/workout',
   myUploader.single('workoutPhoto'),
 
   (req, res, next) => {
+
     console.log('FILE UPLOAD---------------------');
     console.log(`WORKOUT DATE`+req.body.futureWorkout);
-    const theWorkout = new Workout({
+    // var date;
+
+    const theWorkout = new Workout(
+    {
       strength : {
       strName : req.body.strName,
       weight: req.body.weight,
@@ -62,8 +66,8 @@ workoutRouter.post('/workout',
       },
       // photoAddress: `/uploads/${req.file.filename}`,
       performer: req.user._id,
+      address: req.body.addressInput,
       date: req.body.futureWorkout,
-      address: req.body.address
 
     });
 

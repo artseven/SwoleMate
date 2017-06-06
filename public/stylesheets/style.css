@@ -488,9 +488,9 @@ legend{
 }
 
 #map {
-  width: 70%;
+  width: 100%;
   margin-left: 20px;
-  height: 500px;
+  height: 600px;
   background-color: grey;
 }
 
@@ -591,4 +591,22 @@ legend{
   font-size: 25px;
   font-weight: 500;
   padding: 6px 12px;
+}
+
+#toggle-cardio {
+  max-width: 50px;
+  margin-left: -50px;
+}
+
+#toggle-strength {
+  max-width: 50px;
+  margin-left: -10px;
+}
+
+body > div > div > div > div > div > div.panel-body > div > div > table > tbody > tr:nth-child(3) > td:nth-child(2) {
+  text-align: center;
+}
+
+body > div > div > div > div > div > div.panel-body > div > div > table > tbody > tr:nth-child(5) > td:nth-child(2) {
+  margin-left: 100px;
 }

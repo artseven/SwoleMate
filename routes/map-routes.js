@@ -14,6 +14,26 @@ mapRouter.get('/map',
   }
 );
 
+mapRouter.get('/workout/map',
+  ensure.ensureLoggedIn('/login'),
+  (req, res, next) => {
+    Workout.find(
+      { owner: req.user._id },
+      (err, workoutList) => {
+        if (err) {
+          next(err);
+          return;
+        }
+
+        res.render('maps/my-map-view.ejs', {
+          workouts: workoutList,
+          successMessage: req.flash('success')
+        });
+      }
+    );
+  }
+);
+
 
 
 
