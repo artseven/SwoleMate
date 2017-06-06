@@ -12,11 +12,14 @@ const passport     = require('passport');
 const bcrypt       = require('bcrypt');
 const flash        = require('connect-flash');
 
+
+// Load our ENVIRONMENT VARIABLES from the .env file in dev
+require('dotenv').config();
 // Tell node to run the code contained in this file
 // (this sets up passport and our strategies)
 require('./config/passport-config.js');
 
-mongoose.connect('mongodb://localhost/swolemate');
+mongoose.connect(process.env.MONGODB_URI);
 
 const app = express();
 
@@ -25,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // default value for title local
-app.locals.title = 'SwoleMate - get swole with the help of pro';
+app.locals.title = 'SwoleMate - get into fitness with help of pro';
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

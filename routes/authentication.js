@@ -124,16 +124,16 @@ authRoutes.get('/auth/facebook/callback', passport.authenticate('facebook', {
 }));
 
 
-authRoutes.get('/auth/google', passport.authenticate('google', {
-  scope: ["https://www.googleapis.com/auth/plus.login",
-          "https://www.googleapis.com/auth/plus.profile.emails.read"]
-}));
-
-authRoutes.get('/auth/google/callback', passport.authenticate('google', {
-  successRedirect: '/',
-  failureRedirect:'/login'
-}));
-
+// authRoutes.get('/auth/google', passport.authenticate('google', {
+//   scope: ["https://www.googleapis.com/auth/plus.login",
+//           "https://www.googleapis.com/auth/plus.profile.emails.read"]
+// }));
+//
+// authRoutes.get('/auth/google/callback', passport.authenticate('google', {
+//   successRedirect: '/',
+//   failureRedirect:'/login'
+// }));
+//
 
 
 authRoutes.get('/logout', ensure.ensureLoggedIn('/login'), (req, res) => {
